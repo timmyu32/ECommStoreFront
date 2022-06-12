@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState, setState, useEffect } from 'react';
 import styled from 'styled-components';
 import Navbar from '../components/Navbar';
 import Announcement from '../components/Announcement';
 import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
 import { IoAddCircleSharp, IoRemoveCircleSharp } from 'react-icons/io5';
+import axios from "axios";
+
 
 
 const Container = styled.div`
@@ -100,29 +102,40 @@ const Button = styled.button`
 
 
 
-const Product = () => {
+const Product = (props) => {
+    const [data, setData] = useState([]);
+
+    useEffect(() =>{
+        getItems();
+    }, []);
+
+    const getItems = async () => {
+        await axios.get("http://127.0.0.1:8000/api/product/"+ props.id).then(res => {
+        setData(res.data.product[0]);
+        console.log(data);
+        }).catch(err => console.log(err));
+        
+    }
+
+
   return (
     <Container>
         <Navbar/>
         <Announcement/>
         <Wrapper>
             <ImgContainer>
-                <Image src="https://n.nordstrommedia.com/id/sr3/80eb5b5a-efaa-4c5c-bfb3-912915f9e232.jpeg"/>
+                <Image src={data.img}/>
             </ImgContainer>
             <InfoContainer>
-                <Title>Classic Dress Shirt</Title>
-                <Desc>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, fugit cum possimus consequatur dignissimos laboriosam. Autem fugit totam ipsam deserunt possimus dolorem nemo, voluptatibus aspernatur sunt excepturi quaerat! Ipsam, nulla!</Desc>
-                <Price>$50</Price>
+                <Title>{data.title}</Title>
+                <Desc>{data.desc}</Desc>
+                <Price>${data.price1}</Price>
             
                 <FilterContainer>
                     <Filter>
                         <FilterTitle>Size</FilterTitle>
                         <FilterSize>
-                            <FilterSizeOption>XS</FilterSizeOption>
-                            <FilterSizeOption>S</FilterSizeOption>
-                            <FilterSizeOption>M</FilterSizeOption>
-                            <FilterSizeOption>L</FilterSizeOption>
-                            <FilterSizeOption>XL</FilterSizeOption>
+                            <FilterSizeOption>{data.size}</FilterSizeOption>
                         </FilterSize>
                     </Filter>
                 </FilterContainer>

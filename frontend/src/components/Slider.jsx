@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
-import { useState } from 'react';
+import React, { useState, setState, useEffect } from 'react';
 import { sliderItem } from '../data'
+import axios from "axios";
+
 
 const Container = styled.div`
     width: 100%;
@@ -66,7 +68,7 @@ const Title = styled.h1`
     font-size: 70px;
 `;
 const Description = styled.p`
-    margin: 50px 0px;
+    margin: 30px 0px;
     font-size: 20px;
     font-weight: 500;
     letter-spacing: 3px;
@@ -99,6 +101,19 @@ const Slider = () => {
 
     };
 
+    const [data, setData] = useState([]);
+
+    useEffect(() =>{
+        getSliderData();
+    }, []);
+
+    const getSliderData = async () => {
+        await axios.get("http://127.0.0.1:8000/api/slider/3").then(res => {
+        setData(res.data.sliderData);
+        }).catch(err => console.log(err));
+        
+}
+
 
   return (
     <Container>
@@ -106,7 +121,7 @@ const Slider = () => {
             <BiLeftArrowAlt/>
         </Arrow>
         <Wrapper slideIndex={slideIndex}>
-            {sliderItem.map(item => (
+            {data.map(item => (
                 <Slide bg={item.bg}>
                 <ImageContainer>
                     <Image src={item.img}/>

@@ -72,7 +72,7 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>ModernMensWear.</Logo>
+          <Logo>GeminiLogisticz.</Logo>
         </Center>
         <Right>
 

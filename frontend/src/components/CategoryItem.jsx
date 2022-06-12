@@ -28,10 +28,9 @@ const Info = styled.div`
 `;
 
 const Title = styled.h1`
-    font-color: white;
-    margin: 20px;
-
-
+    color: black;
+    margin: 0px 20px;
+    background-color: rgba(255, 255, 255, 0.9); 
 `;
 
 const Button = styled.button`
@@ -41,6 +40,13 @@ const Button = styled.button`
     font-color: gray;
     cursor: pointer;
     font-weight: 600;
+    border: solid 2px black;
+    transition: all 0.6s ease;
+
+    &:hover{
+        background-color: black;
+        color: white;
+    }
 `;
 
 const CategoryItem = ({item}) => {

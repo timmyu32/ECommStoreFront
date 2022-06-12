@@ -84,7 +84,7 @@ const ProductList = () => {
                 </Select>
             </Container2>
         </FilterContainer>  
-        <Products/>
+        <Products limit={0}/>
         <Newsletter/>
         <Footer/>
 

@@ -8,6 +8,7 @@ import {BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 function App() {
   return (
     <div className="App">
+      {/* <Product id={5}/> */}
       <Home/>
     </div>
 
